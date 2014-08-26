@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><%= title %></title>
     <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+    <link rel='stylesheet' href='/stylesheets/datepicker.css' />
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body id="trans">
@@ -21,10 +22,9 @@
 
         <div class="text">
         <p>
-          Lorem ipsum ultricies dictum lorem est platea libero egestas, lacus hendrerit rutrum magna aenean curabitur adipiscing nullam aliquet, ut per aenean quis nisl cursus cubilia.
+          This transaction csv exporter tool allows you to retrieve your transaction data in an easy to read format. With this tool you can specify a date range for your transactions, as well as the transaction types you are wanting to retrieve. (money sent, money received, deposit, withdrawal, fee)
         </p>
         </div>
-
         <div class="actions center">
         <a href="/login" class="btn btn-primary">Sign in with Dwolla</a>
         </div>
@@ -32,6 +32,8 @@
       </div>
     </div>
   </div>
-	<script type="text/javascript" src='javascripts/bootstrap.min.js'></script>
+  <script type="text/javascript" src='javascripts/jquery.js'></script>
+	<script type="text/javascript" src='javascripts/bootstrap.js'></script>
+  <script type="text/javascript" src='javascripts/application.js'></script>
   </body>
 </html>
