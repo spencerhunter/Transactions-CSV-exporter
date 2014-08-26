@@ -16,7 +16,7 @@ router.get('/', function(req, res) {
 router.get('/login', function(req, res) {
 	var scope = 'Transactions';
 	var client_id = 'xCQs3boCi+/H8pzCdETnlQTlDUONfwZ6iExbqD2M+67/x15MYB';
-	var redirect_uri = 'http://127.0.0.1:3000/return';
+	var redirect_uri = 'http://dwolladwollabill.herokuapp.com/return';
 	var url = util.format("https://www.dwolla.com/oauth/v2/authenticate?client_id=%s&response_type=code&redirect_uri=%s&scope=%s",
 	 encodeURIComponent(client_id),
 	 encodeURIComponent(redirect_uri),
@@ -26,7 +26,7 @@ router.get('/login', function(req, res) {
 //step 2 & 3
 router.get('/return', function(req, res) {
 	var client_id = 'xCQs3boCi+/H8pzCdETnlQTlDUONfwZ6iExbqD2M+67/x15MYB';
-	var redirect_uri = 'http://127.0.0.1:3000/return';
+	var redirect_uri = 'http://dwolladwollabill.herokuapp.com/return';
 	var client_secret = 'zur+MrNwcZmG/QPbwMG8CigFe+qwoQrprXed3TbvP1EcvgSAMP';
 	var code = req.query.code;
 	var url = util.format("https://www.dwolla.com/oauth/v2/token?client_id=%s&client_secret=%s&grant_type=authorization_code&redirect_uri=%s&code=%s",
