@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><%= title %></title>
     <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+    <link rel='stylesheet' href='/stylesheets/datepicker.css' />
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body id="trans">
@@ -16,18 +17,46 @@
     <div id="splash" class="screen">
       <div class="box">
         <div class="content">
+        <h2 id="name"></h2>
+        <form method="POST" action="/Transactions" class="form-horizontal" role="form">
+          <div class="input-group">
+            <h3>Select Date Range</h3>
+            <label>From:</label>
+            <input type="text" class="from_date" name="from_date" placeholder="Select start date" contenteditable="false">
+            <label>To:</label>
+            <input type="text" class="to_date" name="to_date" placeholder="Select end date" contenteditable="false">
+          </div>
+          <div class="control-group">
+            <div class="controls">
+            <label class="checkbox">
+                <input type="checkbox" class="check" value="money_sent" id="inlineCheckbox1"> Money Sent
+            </label>
+            <label class="checkbox">
+                <input type="checkbox" class="check" value="money_received" id="inlineCheckbox2"> Money Received
+            </label>
+            <label class="checkbox">
+                <input type="checkbox" class="check" value="deposit" id="inlineCheckbox3"> Deposit
+            </label>
+            <label class="checkbox">
+                <input type="checkbox" class="check" value="withdrawal" id="inlineCheckbox4"> Withdrawal
+            </label>
+            <label class="checkbox">
+                <input type="checkbox" class="check" value="fee" id="inlineCheckbox5"> Fee
+            </label>
+            </div>
+          </div>
+          <button type="submit" id="rangeTrans" class="btn btn-primary">Get customized transactions</button>
+        </form>
 
-        <h2>Welcome</h2>
-
-        <div class="text">
-        <p>
-          Lorem ipsum ultricies dictum lorem est platea libero egestas, lacus hendrerit rutrum magna aenean curabitur adipiscing nullam aliquet, ut per aenean quis nisl cursus cubilia.
-        </p>
-        </div>
+        <hr />
+        <a id="allTrans" class="btn btn-primary">Get all transactions</a>
         </div>
       </div>
     </div>
   </div>
-  <script type="text/javascript" src='javascripts/bootstrap.min.js'></script>
+  <script type="text/javascript" src='javascripts/jquery.js'></script>
+  <script type="text/javascript" src='javascripts/bootstrap.js'></script>
+  <script type="text/javascript" src='javascripts/bootstrap-datepicker.js'></script>
+  <script type="text/javascript" src='javascripts/application.js'></script>
   </body>
 </html>
