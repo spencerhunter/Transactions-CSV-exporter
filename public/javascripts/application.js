@@ -31,13 +31,15 @@ $('.to_date')
     });  
 });
 
-$('#rangeTrans').on('click',function(){
+$('.check').on('click',function(){
     var beginDate = $('.from_date').val();
     var endDate = $('.to_date').val();
     var selectedTypes = [];
     $('.controls input:checked').each(function() {
     selectedTypes.push($(this).attr('value'));
     });
+    selectedTypes = selectedTypes.join(",");
+    $('#allTypes').val(selectedTypes);
 });
 
 $('#allTrans').on('click', function() {

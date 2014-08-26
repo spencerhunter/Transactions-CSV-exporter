@@ -53,6 +53,7 @@ console.log(req.session.access_token);
 router.post('/Transactions', function(req, res) {
 	console.log(req.body['from_date']);
 	console.log(req.body['to_date']);
+	console.log(req.body['allTypes']);
 	console.log(req.session.access_token);
 	var transactions = [];
 
