@@ -1,3 +1,5 @@
+@import "bootstrap/bootstrap.less";
+
 body {
   padding: 100px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -7,3 +9,104 @@ a {
   color: #00B7FF;
 }
 
+#trans {
+  background: #eceef1;
+
+  #header {
+    padding: 0 0 50px;
+  }
+}
+
+.container {
+  width: 940px;
+  margin: 0 auto;
+  zoom: 1;
+  *zoom: 1;
+:after {
+  display: block;
+  visibility: hidden;
+  height: 0;
+  clear: both;
+  content: ".";
+}
+}
+
+#splash {
+  width: 940px;
+
+  .box {
+    width: 900px;
+  }
+
+  .orange {
+    display: block;
+    color: #d8812d;
+    padding: 20px 0 25px;
+    text-shadow: #fff 0 1px 1px;
+
+    b {
+      font-weight: bold;
+    }
+  }
+  .actions {
+    padding-bottom: 20px;
+  }
+  small {
+    text-align: center;
+  }
+}
+
+/*
+	Button Styles
+*/
+.btn {
+	display: inline-block;
+	padding: 10px 20px;
+	cursor: pointer;
+
+	border: 1px solid #b6cbd1;
+
+  font-family: "Helvetica";
+  font-weight: bold;
+  font-size: 13px;
+  color: #fff;
+  text-decoration: none;
+
+	&:hover, &.current {
+		background-position: 0 -50px;
+	}
+
+  &.btn-primary {
+  	color: #fff;
+	background-color: #fd8d00;
+	border: 1px solid #f57100;
+	border-bottom: 1px solid #de5400;
+	background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #fd8d00), color-stop(100%, #fc6400));
+	background: -webkit-linear-gradient(top, #fd8d00,#fc6400);
+	background: -moz-linear-gradient(top, #fd8d00,#fc6400);
+	background: -o-linear-gradient(top, #fd8d00,#fc6400);
+	background: linear-gradient(top, #fd8d00,#fc6400);
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-ms-border-radius: 4px;
+	-o-border-radius: 4px;
+	border-radius: 4px;
+
+  	&:hover {
+  		border-color: #ff861e #ff861e #de5400 #ff861e;
+		background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ff9918), color-stop(100%, #ff7317));
+		background: -webkit-linear-gradient(top, #ff9918,#ff7317);
+		background: -moz-linear-gradient(top, #ff9918,#ff7317);
+		background: -o-linear-gradient(top, #ff9918,#ff7317);
+		background: linear-gradient(top, #ff9918,#ff7317);
+  	}
+  	&:active {
+  		background: #fc6400;
+		border: 1px solid #fc6400;
+		border-top: 1px solid #de5400;
+		-webkit-box-shadow: inset 0 2px 3px #de5400;
+		-moz-box-shadow: inset 0 2px 3px #de5400;
+		box-shadow: inset 0 2px 3px #de5400;
+  	}
+  }
+}
