@@ -5798,6 +5798,19 @@ a {
   clear: both;
   content: ".";
 }
+.box {
+  background: url(/images/black.png) repeat 0 0;
+  margin: 0 auto;
+  padding: 8px;
+  width: 710px;
+  text-align: left;
+}
+.box .content {
+  background: #fdfdfd;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 0 5px 1px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 0 5px 1px;
+  padding: 25px;
+}
 #splash {
   width: 940px;
 }
@@ -5820,7 +5833,7 @@ a {
   text-align: center;
 }
 /*
-	Button Styles
+  Button Styles
 */
 .btn {
   display: inline-block;
