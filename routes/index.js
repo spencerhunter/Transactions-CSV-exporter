@@ -51,11 +51,6 @@ console.log(req.session.access_token);
 
 router.post('/Transactions', function(req, res) {
 	var transactions = [];
-	console.log(req.body['from_date']);
-	console.log(req.body['to_date']);
-	var allTypes = (req.body['allTypes']);
-	console.log(typeof allTypes);
-	console.log(allTypes);
 
 	getAllTransactions(req.session.access_token, 0, req.body['from_date'], req.body['to_date'], req.body['allTypes'], [], function(data) {
 		data.forEach(function(transaction) {
@@ -87,6 +82,7 @@ router.post('/Transactions', function(req, res) {
 
 function getAllTransactions(token, skip, sinceDate, endDate, types, transactions, fn) {
 	 //console.log('Getting some transactions');
+
 	 params = {
 	 	limit: 200,
 	 	skip: skip,
@@ -94,6 +90,15 @@ function getAllTransactions(token, skip, sinceDate, endDate, types, transactions
 	 	endDate: endDate,
 	 	types: types
 	 };
+	 if (sinceDate.length === 0) {
+	 	delete params.sinceDate;
+	 }
+	 if (endDate.length === 0) {
+	 	delete params.endDate;
+	 }
+	 if (types.length === 0) {
+	 	delete params.types;
+	 }
 
 	 dwolla.transactions(token, params, function(err, data) {
 	 	if (data.length > 0) {
