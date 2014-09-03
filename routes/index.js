@@ -16,7 +16,7 @@ router.get('/', function(req, res) {
 router.get('/login', function(req, res) {
 	var scope = 'Transactions';
 	var client_id = 'xCQs3boCi+/H8pzCdETnlQTlDUONfwZ6iExbqD2M+67/x15MYB';
-	var redirect_uri = 'http://dwolladwollabill.herokuapp.com/return';
+	var redirect_uri = 'http://127.0.0.1:3000/return';
 	var url = util.format("https://www.dwolla.com/oauth/v2/authenticate?client_id=%s&response_type=code&redirect_uri=%s&scope=%s",
 	 encodeURIComponent(client_id),
 	 encodeURIComponent(redirect_uri),
@@ -26,7 +26,7 @@ router.get('/login', function(req, res) {
 //step 2 & 3
 router.get('/return', function(req, res) {
 	var client_id = 'xCQs3boCi+/H8pzCdETnlQTlDUONfwZ6iExbqD2M+67/x15MYB';
-	var redirect_uri = 'http://dwolladwollabill.herokuapp.com/return';
+	var redirect_uri = 'http://127.0.0.1:3000/return';
 	var client_secret = 'zur+MrNwcZmG/QPbwMG8CigFe+qwoQrprXed3TbvP1EcvgSAMP';
 	var code = req.query.code;
 	var url = util.format("https://www.dwolla.com/oauth/v2/token?client_id=%s&client_secret=%s&grant_type=authorization_code&redirect_uri=%s&code=%s",
@@ -47,17 +47,17 @@ router.get('/return', function(req, res) {
 router.get('/trans', function(req, res) {
 console.log(req.session.access_token);	
   res.render('trans', { title: 'Transactions CSV exporter' });
-
 });
 
 router.post('/Transactions', function(req, res) {
+	var transactions = [];
 	console.log(req.body['from_date']);
 	console.log(req.body['to_date']);
-	console.log(req.body['allTypes']);
-	console.log(req.session.access_token);
-	var transactions = [];
+	var allTypes = (req.body['allTypes']);
+	console.log(typeof allTypes);
+	console.log(allTypes);
 
-	getAllTransactions(req.session.access_token, 0, req.body['from_date'], req.body['to_date'], [], function(data) {
+	getAllTransactions(req.session.access_token, 0, req.body['from_date'], req.body['to_date'], req.body['allTypes'], [], function(data) {
 		data.forEach(function(transaction) {
 			var sum = 0;
 			if (transaction.Fees != null) {
@@ -71,14 +71,13 @@ router.post('/Transactions', function(req, res) {
 		});
 		var keys = [];
 		for(var k in data[0]) {
-			
 			keys.push(k);
 		}
 
 		//console.log("total " + keys.length + " keys: " + keys);	
 		json2csv({data: data, fields: keys}, function(err, csv) {
 	  	if (err) console.log(err);
-	  		res.set('Content-Disposition', 'attachment; filename="allTransactions.csv"');
+	  		res.set('Content-Disposition', 'attachment; filename="dwollaTransactions.csv"');
         	res.set('Content-Type', 'text/csv');
         	res.send(csv);
 		});
@@ -86,14 +85,14 @@ router.post('/Transactions', function(req, res) {
 
 });
 
-function getAllTransactions(token, skip, sinceDate, endDate, transactions, fn) {
+function getAllTransactions(token, skip, sinceDate, endDate, types, transactions, fn) {
 	 //console.log('Getting some transactions');
 	 params = {
 	 	limit: 200,
 	 	skip: skip,
 	 	sinceDate: sinceDate,
-	 	endDate: endDate
-
+	 	endDate: endDate,
+	 	types: types
 	 };
 
 	 dwolla.transactions(token, params, function(err, data) {
@@ -101,10 +100,9 @@ function getAllTransactions(token, skip, sinceDate, endDate, transactions, fn) {
 	 	 // append response to transactions
 	 	 //console.log("getting some transactions")
 	 	 transactions = transactions.concat(data);
-	 	 //console.log(data);
 
 	 	 // get more transactions
-	 	 return getAllTransactions(token, params.skip + params.limit, sinceDate, endDate, transactions, fn);
+	 	 return getAllTransactions(token, params.skip + params.limit, sinceDate, endDate, types, transactions, fn);
 	 	}
 	 	else {
 	 	 // base case: there are no transactions in this chunk
@@ -114,6 +112,5 @@ function getAllTransactions(token, skip, sinceDate, endDate, transactions, fn) {
 	 });
 
 	};
-
 
 module.exports = router;
