@@ -39,7 +39,3 @@ $('.check').on('click', function() {
     selectedTypes = selectedTypes.join(",");
     $('#allTypes').val(selectedTypes);
 });
-
-$('#allTrans').on('click', function() {
-    window.open('http://127.0.0.1:3000/Transactions');
-});
