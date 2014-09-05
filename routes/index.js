@@ -4,9 +4,7 @@ var util = require('util');
 var request = require('request');
 var dwolla = require('dwolla');
 var json2csv = require('json2csv');
-var _ = require('underscore');
-var fs = require('fs');
-var c = require('../config')
+var c = require('../config');
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -37,7 +35,6 @@ router.get('/return', function(req, res) {
 	request(url, function (error, response, body) {
 	  if (!error && response.statusCode == 200) {
 	  var data = JSON.parse(body);
-	  console.log(data.access_token);
 	  req.session.access_token = data.access_token;
 	  res.redirect('/trans');
 	  }
@@ -45,7 +42,6 @@ router.get('/return', function(req, res) {
 });
 
 router.get('/trans', function(req, res) {
-console.log(req.session.access_token);	
   res.render('trans', { title: 'Transactions CSV exporter' });
 });
 
@@ -68,8 +64,7 @@ router.post('/Transactions', function(req, res) {
 		for(var k in data[0]) {
 			keys.push(k);
 		}
-
-		//console.log("total " + keys.length + " keys: " + keys);	
+	
 		json2csv({data: data, fields: keys}, function(err, csv) {
 	  	if (err) console.log(err);
 	  		res.set('Content-Disposition', 'attachment; filename="dwollaTransactions.csv"');
