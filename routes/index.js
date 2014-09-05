@@ -16,7 +16,7 @@ router.get('/', function(req, res) {
 router.get('/login', function(req, res) {
 	var scope = 'Transactions';
 	var client_id = c.client_id;
-	var redirect_uri = 'http://127.0.0.1:3000/return';
+	var redirect_uri = c.host + '/return';
 	var url = util.format("https://www.dwolla.com/oauth/v2/authenticate?client_id=%s&response_type=code&redirect_uri=%s&scope=%s",
 	 encodeURIComponent(client_id),
 	 encodeURIComponent(redirect_uri),
@@ -26,7 +26,7 @@ router.get('/login', function(req, res) {
 //step 2 & 3
 router.get('/return', function(req, res) {
 	var client_id = c.client_id;
-	var redirect_uri = 'http://127.0.0.1:3000/return';
+	var redirect_uri = c.host + '/return';
 	var client_secret = c.client_secret;
 	var code = req.query.code;
 	var url = util.format("https://www.dwolla.com/oauth/v2/token?client_id=%s&client_secret=%s&grant_type=authorization_code&redirect_uri=%s&code=%s",
@@ -90,13 +90,13 @@ function getAllTransactions(token, skip, sinceDate, endDate, types, transactions
 	 	endDate: endDate,
 	 	types: types
 	 };
-	 if (sinceDate.length === 0) {
+	 if (sinceDate.length == 0) {
 	 	delete params.sinceDate;
 	 }
-	 if (endDate.length === 0) {
+	 if (endDate.length == 0) {
 	 	delete params.endDate;
 	 }
-	 if (types.length === 0) {
+	 if (types.length == 0) {
 	 	delete params.types;
 	 }
 
